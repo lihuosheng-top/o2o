@@ -11,15 +11,15 @@ namespace app\common\model;
 use think\Model;
 
 class  Category extends  Model{
-    //获取所有的一级分类
-
-    public  function  getFirstNomalCategories()
+    //TODO:自动写入时间戳,2个地方都可以
+    protected $autoWriteTimestamp =true;
+    //TODO:获取所有的一级分类
+    public  function  getFirstNomalCategories($parent_id =0)
     {
         //条件
-
         $data =[
             'status'=>['neq',-1],
-            'parent_id'=>0
+            'parent_id'=>$parent_id
         ];
 
         //排序属性
@@ -29,6 +29,22 @@ class  Category extends  Model{
             'id'=>'desc',
         ];
         return $this->where($data)->order($order)->paginate();
+    }
+
+    public function getAllFirstNomalCategories()
+    {
+        //条件
+        $data =[
+          'status'=>['neq',-1],
+            'parent_id'=>0
+
+        ];
+        //排序属性
+        $order =[
+          'listorder'=>'desc',
+            'id'=>'desc'
+        ];
+        return $this->where($data)->order($order)->select();
 
     }
 
