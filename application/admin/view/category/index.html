@@ -36,18 +36,12 @@
 		</table>
 	</div>
 	{:pagination($categories)}
+	<img src="{:url('category/test')}" alt="">
 </div>
 <!--包含头部文件-->
 {include file="public/footer" /}
 <script>
 
-/*-删除*/
-function o2o_del(id,url){
-	
-	layer.confirm('确认要删除吗？',function(index){
-		window.location.href=url;
-	});
-}
 
 var SCOPE ={
     'listorder_url':"{:url('category/listorder')}"

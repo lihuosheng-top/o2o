@@ -37,3 +37,31 @@ function pagination($pageObj){
 
     return $result;
 }
+
+function doCurl($url,$type=0,$data=[])
+{
+
+    //初始化curl
+    $ch=curl_init();
+    //设置相关的参数set option
+    //CURLOPT_UR 请求的链接curlopt
+    //CURLOPT_RETURNTRANSFER 请求结果以文本流形式返回returntransfer
+    //CURLOPT_HEADE 是否返回http头部信息
+    curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+    curl_setopt($ch,CURLOPT_HEADER,0);
+
+    //判断请求方式
+    if($type==1)
+    {
+        //post 请求
+        curl_setopt($ch,CURLOPT_POST,$url);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
+    }
+    //执行Curl请求
+    $res =curl_exec($ch);
+    //关闭Curl请求
+    curl_close($ch);
+    return $res;
+}
+

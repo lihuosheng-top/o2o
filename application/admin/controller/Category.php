@@ -166,5 +166,13 @@ class  Category extends  Controller{
 
     }
 
+    //TODO:测试图片的方法
+
+    public function  test()
+    {
+        $res =\Map::staticImage('贵港市平南县');
+        return $res;
+    }
+
 
 }
