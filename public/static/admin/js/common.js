@@ -106,6 +106,13 @@ $('.categoryId').change(function () {
            });
            $(".se_category_id").html(categoryHtml);
        }
+       if(res.code==0)
+       {
+
+           $(".se_category_id").html('');
+       }
+
+
     },'JSON');
 });
 

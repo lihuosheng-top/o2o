@@ -72,9 +72,13 @@ function bisRegister($status)
     {
         $str ='审核通过';
     }
-    else if($status==0)
+    else if($status==2)
     {
         $str ='审核不通过,材料不符合要求,请重新提交';
+    }
+    else if($status==0)
+    {
+    $str='正在审核,稍后平台方向会向您发送邮件,请关注邮件';
     }
     else
     {
@@ -83,5 +87,55 @@ function bisRegister($status)
 
     return $str;
 
+}
+
+//根据category_path处理二级分类信息
+
+function getCategoryDetailByPath($category_path)
+{
+    if(empty($category_path))
+    {
+        return '';
+    }
+    if(preg_match('/,/',$category_path))
+    {
+        //先按照,号切割字符串(temp临时的,中间量的)
+        $tempArray =explode(',',$category_path);
+        //'5,10 |12|14'=>['5','10|12|14']
+        $categoryID =$tempArray[0];
+        $tempString =$tempArray[1];
+
+        //按照|分割形成数组
+        $temp_se_arr =explode('|',$tempString);
+
+        //[10,12,14]5分支下共有10,12,14,16,18
+        $allCategories =model('Category')->getAllFirstNomalCategories(intval($categoryID));
+        //循环组合形成input标签字符串
+        $htmlString = '';
+
+        for($e=0;$e<count($allCategories);$e++)
+        {
+            $current =$allCategories[$e];
+            //循环匹配temp_se_arr
+            for ($j=0;$j<count($temp_se_arr);$j++)
+            {
+                $se_current =$temp_se_arr[$j];
+                //判断当前current_id的是否存在tem_se_arr中
+
+                if(in_array($current['id'],$temp_se_arr))
+                {
+                    $htmlString .="<input type='checkbox' value='".$current['id']."'checked>";
+                    $htmlString.="<lable>".$current['name']."</lable>";
+                }
+            }
+        }
+        return $htmlString;
+
+    }
+    else
+    {
+
+        return '';
+    }
 }
 
