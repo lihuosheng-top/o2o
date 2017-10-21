@@ -16,12 +16,13 @@ class  BisAccount extends  Validate{
     ];
 
     protected  $message =[
-      'username.require'=>'不能为空',
-        'password.require'=>'不能为空'
+      'username.require'=>'用户名不能为空',
+        'password.require'=>'密码不能为空'
     ];
     protected  $scene =[
 
-        'add'=>['usernaem','password']
+        'add'=>['username','password'],
+        'login'=>['username','password']
     ];
 
 

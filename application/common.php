@@ -64,4 +64,24 @@ function doCurl($url,$type=0,$data=[])
     curl_close($ch);
     return $res;
 }
+//TODO:判断商品注册信息
+
+function bisRegister($status)
+{
+    if($status==1)
+    {
+        $str ='审核通过';
+    }
+    else if($status==0)
+    {
+        $str ='审核不通过,材料不符合要求,请重新提交';
+    }
+    else
+    {
+        $str ='该申请已经删除';
+    }
+
+    return $str;
+
+}
 

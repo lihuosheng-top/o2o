@@ -176,10 +176,30 @@ class  Register extends Controller
         {
             $this->error('申请失败');
         }
-        $this->success('申请加入审核队列成功');
+//        $this->success('申请加入审核队列成功');
+        //以上的例子已经证明成功申请,现在下面的是要发送邮件形式
 
-
+        $title ='商城申请入驻审核通知';
+        $url =request()->domain().url('bis/register/waitting',['id'=>$bisId]);
+        $content ='您的店铺信息正在审核中,<a href="'.$url.'" target="_blank">点击查看状态</a>';
+        \phpmailer\Email::send($data['email'],$title,$content);
+        $this->success('申请成功',url('register/waitting',['id'=>$bisId]));
     }
 
+    public function waitting($id)
+    {
+        if(empty($id))
+        {
+            return '';
+
+        }
+        //根据id获取bis的信息
+
+        $detail =model('Bis')->get($id);
+        return $this->fetch('',[
+            'detail'=>$detail
+        ]);
+
+    }
 
 }
