@@ -2,16 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: lihuosheng
- * Date: 2017/10/16
- * Time: 下午3:16
+ * Date: 2017/10/19
+ * Time: 上午8:34
  */
+
 namespace  app\common\validate;
 use think\Validate;
 
-class  Bis extends  Validate{
-    protected $rule =[
-
-        'name'=>'require|max:50',
+class Bis extends  Validate{
+    protected  $rule =[
+      'name'=>'require|max:20',
         'city_id'=>'require',
         'se_city_id'=>'require',
         'email'=>'require',
@@ -25,9 +25,8 @@ class  Bis extends  Validate{
         'faren_tel'=>'require'
 
     ];
-
     protected  $message=[
-      'name.require'=>'名字不能为空',
+        'name.require'=>'名字不能为空',
         'city_id.require'=>'所属省份不能为空',
         'se_city_id.require'=>'选择城市不能为空',
         'name.max'=>'长度不能超过20',
@@ -41,7 +40,6 @@ class  Bis extends  Validate{
         'faren.require'=>'法人姓名不能为空',
         'faren_tel.require'=>'法人电话不能为空'
     ];
-
     protected $scene =[
 
         'add'=>[
@@ -59,4 +57,6 @@ class  Bis extends  Validate{
             'faren_tel'
         ]
     ];
+
+
 }

@@ -2,7 +2,7 @@
 {include file="public/header" /}
 <div class="cl pd-5 bg-1 bk-gray mt-20"> 添加分店信息</div>
 <article class="page-container">
-	<form class="form form-horizontal" id="form-article-add" method="post" action="{:url('location/add')}">
+	<form class="form form-horizontal" id="form-article-add" method="post" action="">
 	基本信息：
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分店名称：</label>
@@ -17,11 +17,9 @@
 				<span class="select-box">
 				<select name="city_id" class="select cityId">
 					<option value="0">--请选择--</option>
-
 					{volist name="city" id="vo"}
 					<option value="{$vo.id}">{$vo.name}</option>
 					{/volist}
-
 				</select>
 				</span>
 			</div>
@@ -42,7 +40,6 @@
                 <input id="file_upload_image" name="logo" type="hidden" multiple="true" value="">
               </div>
         </div>
-
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">门店介绍：</label>
 			<div class="formControls col-xs-8 col-sm-9">
@@ -55,11 +52,9 @@
 			<div class="formControls col-xs-8 col-sm-3"> <span class="select-box">
 				<select name="category_id" class="select categoryId">
 					<option value="0">--请选择--</option>
-
-                {volist name="category" id="vo"}
-                <option value="{$vo.id}">{$vo.name}</option>
-            {/volist}
-
+					{volist name="category" id="vo"}
+					<option value="{$vo.id}">{$vo.name}</option>
+					{/volist}
 				</select>
 				</span>
 			</div>
@@ -98,7 +93,7 @@
 		
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button  class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 申请</button>
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 申请</button>	
 			</div>
 		</div>
 	</form>
@@ -110,8 +105,8 @@
 <script type="text/javascript" src="__STATIC__/admin/hui/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 <script>
  var SCOPE = {
-     'city_second_url':"{:url('register/getregister')}",
-     'category_second_url':"{:url('register/getcategories')}",
+   				'city_second_url':"{:url('register/getregister')}",
+	 			'category_second_url':"{:url('register/getcategories')}",
      'uploadify_swf_url':"__STATIC__/admin/uploadify/uploadify.swf",
      'upload_image_url':"{:url('api/image/upload')}"
  };
