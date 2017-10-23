@@ -16,7 +16,7 @@ function o2o_s_edit(title, url, w, h) {
     layer_show(title, url, w, h);
 }
 /*-删除*/
-function o2o_del(id, url) {
+function o2o_del( url) {
 
     layer.confirm('确认要删除吗？', function (index) {
         window.location.href = url;
@@ -73,48 +73,65 @@ $(".cityId").change(function () {
             //根据数据重新组合新的<option>循环
             var cityHtml = '';
             $(data).each(function () {
-                cityHtml += "<option value=" + this.id + ">" + this.name + "</option>>"
+                cityHtml += "<option value=" + this.id + ">" + this.name + "</option>"
             })
             //写入到定位位置
             $(".se_city_id").html(cityHtml);
         }
     }, 'JSON');
 });
-
-//TODO:获取分类二级子栏目
-//获取分类信息的二级子栏目,例如:获取点击美食,显示'火锅,过把肉';
+// 获取分类信息的二级子栏目,列如:获取点击'美食',显示火锅.什么什么肉
 
 $('.categoryId').change(function () {
    //获取当前id作为查询的条件parent_id
-    var id=$(this).val();
-    var posiData={
-      id:id
-};
+    var id = $(this).val();
+    var posiData = {
+        id: id
+    };
+    // console.log(posiData);
+    var url = SCOPE.category_second_url;
 
-    var url =SCOPE.category_second_url;
+    $.post(url,posiData,function(res) {
+        if(res.code ==1)
+        {
+            var data =res.data;
 
-    $.post(url,posiData,function (res) {
-       if(res.code==1)
-       {
-           var data =res.data;
-           //根据数据
-           console.log(data);
-           var categoryHtml='';
-           $(data).each(function () {
-              categoryHtml +="<input type='checkbox' name='se_category_id[]' value='" +this.id + "'>";
-              categoryHtml +="<label>"+this.name+"</label>"
-           });
-           $(".se_category_id").html(categoryHtml);
-       }
-       if(res.code==0)
-       {
+            //根据数据
+            console.log(data);
+            var categoryHtml ='';
+            $(data).each(function () {
+                categoryHtml +="<input type='checkbox' name='se_category_id[]' value='" +this.id+"'>" ;
+                categoryHtml +="<label >"+this.name+"</label>"
+            });
+            $(".se_category_id").html(categoryHtml);
 
-           $(".se_category_id").html('');
-       }
-
-
+        }
+        if(res.code==0)
+        {
+            $(".se_category_id").html('');
+        }
     },'JSON');
+
 });
+
+
+//h-ui框架提供de 解决时间选择器和tp5标签冲突的问题
+
+function selecttime(flag){
+    if(flag==1){
+        var endTime = $("#countTimeend").val();
+        if(endTime != ""){
+            WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',maxDate:endTime})}else{
+            WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})}
+    }else{
+        var startTime = $("#countTimestart").val();
+        if(startTime != ""){
+            WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',minDate:startTime})}else{
+            WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})}
+    }
+}
+
+
 
 
 

@@ -10,14 +10,15 @@
 				<input type="text" class="input-text" value="" placeholder="" id="" name="name">
 			</div>
 		</div>
-		
+
+
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>所属城市：</label>
 			<div class="formControls col-xs-8 col-sm-2"> 
 				<span class="select-box">
 				<select name="city_id" class="select cityId">
 					<option value="0">--请选择--</option>
-					{volist name="city" id="vos"}
+                    {volist name="city" id="vos"}
 					<option value="{$vos.id}">{$vos.name}</option>
 					{/volist}
 				</select>
@@ -26,17 +27,19 @@
 			<div class="formControls col-xs-8 col-sm-2">
 				<span class="select-box">
 				<select name="se_city_id" class="select se_city_id">
+
 					<option value="0">--请选择--</option>
 				</select>
 				</span> 
 			</div>
 		</div>
-		
+
+
 		<div class="row cl">
               <label class="form-label col-xs-4 col-sm-2">缩略图：</label>
               <div class="formControls col-xs-8 col-sm-9">
                 <input id="file_upload"  type="file" multiple="true" >
-                <img style="display: none" id="upload_org_code_img" src="" width="150" height="150">
+                <img style="display: none" id="upload_org_code_img" src="" width="150" height="200">
                 <input id="file_upload_image" name="logo" type="hidden" multiple="true" value="">
               </div>
         </div>
@@ -44,7 +47,7 @@
               <label class="form-label col-xs-4 col-sm-2">营业执照：</label>
               <div class="formControls col-xs-8 col-sm-9">
                 <input id="file_upload_other"  type="file" multiple="true" >
-                <img style="display: none" id="upload_org_code_img_other" src="" width="150" height="150">
+                <img style="display: none" id="upload_org_code_img_other" src="" width="150" height="200">
                 <input id="file_upload_image_other" name="licence_logo" type="hidden" multiple="true" value="">
               </div>
         </div>
@@ -179,12 +182,14 @@ $(function(){
 	var ue1 = UE.getEditor('editor1');
 });
 
-var SCOPE={
+var SCOPE ={
     'city_second_url':"{:url('register/getregister')}",
+	'category_second_url':"{:url('register/getcategories')}",
 	'uploadify_swf_url':"__STATIC__/admin/uploadify/uploadify.swf",
-	'upload_image_url':"{:url('api/image/upload')}",
-	'category_second_url':"{:url('register/getcategories')}"
+	'upload_image_url':"{:url('api/image/upload')}"
 }
+
+
 </script>
 </body>
 </html>
